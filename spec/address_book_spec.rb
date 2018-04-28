@@ -41,16 +41,16 @@ RSpec.describe AddressBook do
 
   # Test that AddressBook's .import_from_csv() method is working as expected
   describe "#import_from_csv" do
-   it "imports the correct number of entries" do
-    book.import_from_csv("entries.csv")
-    book_size = book.entries.size
-    #check the size of the entries in the AddressBook
-    expect(book_size).to eq 5
-   end
+    it "imports the correct number of entries" do
+      book.import_from_csv("entries.csv")
+      book_size = book.entries.size
+      #check the size of the entries in the AddressBook
+      expect(book_size).to eq 5
+    end
  
     it "imports the 1st entry" do
       book.import_from_csv("entries.csv")
-     #check the first entry
+    #check the first entry
       entry_one = book.entries[0]
       check_entry(entry_one, "Bill", "555-555-4854", "bill@blocmail.com")
     end
@@ -81,6 +81,36 @@ RSpec.describe AddressBook do
       # Check the fifth entry
       entry_five = book.entries[4]
       check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
+    end
+  end
+
+  describe "#import_from_second_csv" do
+    it "imports the correct number of entries" do
+      book.import_from_second_csv("entries_2.csv")
+      book_size = book.entries.size
+      #check the size of the entries in the AddressBook
+      expect(book_size).to eq 3
+    end
+
+    it "imports the 1st entry" do
+      book.import_from_second_csv("entries_2.csv")
+     #check the first entry
+      entry_one = book.entries[0]
+      check_entry(entry_one, "Cole", "555-123-5414", "cole@blocmail.com")
+    end
+
+    it "imports the 2nd entry" do
+      book.import_from_second_csv("entries_2.csv")
+      #check the second entry
+      entry_two = book.entries[1]
+      check_entry(entry_two, "Nate", "555-123-3606", "nate@blocmail.com")
+    end
+
+    it "imports the 3rd entry" do
+      book.import_from_second_csv("entries_2.csv")
+     #check the first entry
+      entry_three = book.entries[2]
+      check_entry(entry_three, "Stephan", "555-123-4854", "stephan@blocmail.com")
     end
   end
 end
