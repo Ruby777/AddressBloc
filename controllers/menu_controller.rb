@@ -13,7 +13,8 @@ class MenuController
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
+        puts "5 - Nuke all entries"
+        puts "6 - Exit"
         print "Enter your selection: "
 
         selection = gets.to_i
@@ -36,8 +37,12 @@ class MenuController
                 read_csv
                 main_menu
             when 5
+                system "clear"
+                @address_book.nuke
+                puts "All entries have been deleted!"
+                main_menu
+            when 6
                 puts "Good-bye!"
-
                 exit(0)
             else
                 system "clear"
@@ -99,25 +104,23 @@ class MenuController
         selection = gets.chomp
 
         case selection
-        when "d"
-            system "clear"
-            delete_entry(entry)
-            main_menu
-        when "e"
-            edit_entry(entry)
-            system "clear"
-            main_menu
-        when "m"
-            system "clear"
-            main_menu
-          else
-            system "clear"
-            puts "#{selection} is not a valid input"
-            puts entry.to_s
-            search_submenu(entry)
-        end
-      end   
-
+            when "d"
+                system "clear"
+                delete_entry(entry)
+                main_menu
+            when "e"
+                edit_entry(entry)
+                system "clear"
+                main_menu
+            when "m"
+                system "clear"
+                main_menu
+            else
+                system "clear"
+                puts "#{selection} is not a valid input"
+                puts entry.to_s
+                search_submenu(entry)
+        end   
     end
 
     def read_csv
@@ -178,7 +181,7 @@ class MenuController
         print "Update phone number: "
         phone_number = gets.chomp
         print "Update email: "
-        email: gets.chomp
+        email = gets.chomp
 
         entry.name = name if !name.empty?
         entry.phone_number = phone_number if !phone_number.empty?
